@@ -8,3 +8,58 @@
 *::after {
   box-sizing: inherit;
 }
+
+.mainContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+.leftPane {
+  width: 70%;
+  padding: 50px 80px 50px 50px;
+  text-align: right;
+}
+
+.leftPane .greeting {
+  margin: 10px 0;
+  font-size: 80px;
+  line-height: 85%;
+}
+
+.leftPane .greeting + p {
+  font-size: 110%;
+  margin-bottom: 25px;
+}
+
+.leftPane .history {
+  height: 400px;
+  padding: 30px;
+  overflow-y: scroll;
+  margin-left: 150px;
+  border-radius: 10px;
+  background-color: white;
+  font-family: "Martian Mono", serif;
+}
+
+.actionButtons {
+  display: flex;
+  margin: 15px 0 0 150px;
+  justify-content: flex-end;
+}
+
+.btnCopy,
+.btnShare,
+.btnDownload {
+  width: 50px;
+  margin-left: 10px;
+}
+
+.btnDownload {
+  width: 100px;
+}
+
+.rightPane {
+  width: 100%;
+  font-family: "Martian Mono", serif;
+}
