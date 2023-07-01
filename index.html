@@ -47,55 +47,225 @@
       defer></script>
   </head>
   <body>
-    <main class="mainContainer container-fluid w-100 m-0 p-0">
-      <div class="leftPane bg-success">
-        <h1 class="greeting fw-bolder">Hello, Username</h1>
-        <p>
-          Lorem ipsum dolor amet consectetur adipisicing.<br />
-          Ipsa cupiditate, blanditiis delectus nesciunt!
-        </p>
+    <main class="mainContainer w-100 m-0 p-0">
+      <div class="panelHistory">
+        <a
+          href="#"
+          class="btnBurger"
+          ><i class="bi bi-list"></i
+        ></a>
 
-        <div class="history">
-          <p>
-            1<br />
-            + 99<br />
-            --------<br />
-            100<br />
-            + 900<br />
-            ========<br />
-            1000<br />
-            1<br />
-            + 99<br />
-            --------<br />
-            100<br />
-            + 900<br />
-            ========<br />
-            1000<br />
-            1<br />
-            + 99<br />
-            --------<br />
-            100<br />
-            + 900<br />
-            ========<br />
-            1000<br />
-          </p>
-        </div>
+        <nav>
+          <a
+            href="#"
+            class="navHome"
+            >Home</a
+          >
+          <a
+            href="#"
+            class="navSupport"
+            >Support / Contribute</a
+          >
+        </nav>
 
-        <div class="actionButtons">
-          <button class="btnCopy btn btn-warning">
-            <i class="bi bi-clipboard"></i>
-          </button>
+        <div class="divButtonsHistory">
+          <section class="btnActions">
+            <a
+              href="#"
+              class="btnCopy btn">
+              <i class="bi bi-clipboard-fill"></i>
+            </a>
 
-          <button class="btnShare btn btn-warning">
-            <i class="bi bi-share"></i>
-          </button>
+            <a
+              href="#"
+              class="btnShare btn">
+              <i class="bi bi-share-fill"></i>
+            </a>
 
-          <button class="btnDownload btn btn-warning">
-            <i class="bi bi-download"></i>
-          </button>
+            <a
+              href="#"
+              class="btnDownload btn">
+              <i class="bi bi-cloud-arrow-down-fill"></i>
+            </a>
+          </section>
+
+          <section class="history">
+            <p>
+              1<br />
+              + 99<br />
+              --------<br />
+              100<br />
+              + 900<br />
+              ========<br />
+              1000<br />
+              1<br />
+              + 99<br />
+              --------<br />
+              100<br />
+              + 900<br />
+              ========<br />
+              1000<br />
+              1<br />
+              + 99<br />
+              --------<br />
+              100<br />
+              + 900<br />
+              ========<br />
+              1000<br />
+            </p>
+          </section>
         </div>
       </div>
-      <div class="rightPane bg-warning"></div>
+
+      <div class="panelCalculator">
+        <div>
+          <a
+            href="#"
+            class="btnClose"
+            ><i class="bi bi-x-lg"></i
+          ></a>
+        </div>
+
+        <h1 class="greeting fw-bolder">Hello,<br />Username</h1>
+
+        <!-- Calculator -->
+        <div class="divUndoRedoCalculator">
+          <div class="calculator">
+            <section class="calculatorDisplay">
+              <div class="prevValue border border-0"></div>
+
+              <input
+                type="text"
+                value="0"
+                class="currValue border border-0" />
+            </section>
+
+            <section class="calculatorKeys">
+              <button
+                id="keyAllClear"
+                class="allClear btn">
+                AC
+              </button>
+              <button
+                id="keyClear"
+                class="clear btn">
+                C
+              </button>
+              <button
+                id="keyDelete"
+                class="delete btn">
+                <i class="bi bi-backspace-fill"></i>
+              </button>
+
+              <button
+                id="keyChangeSign"
+                class="changeSign btn">
+                +/-
+              </button>
+              <button
+                id="keyDivide"
+                class="operator divide btn">
+                /
+              </button>
+              <button
+                id="keyMultiply"
+                class="operator multiply btn">
+                *
+              </button>
+              <button
+                id="keySubtract"
+                class="operator subtract btn">
+                -
+              </button>
+
+              <button
+                id="keySeven"
+                class="number btn">
+                7
+              </button>
+              <button
+                id="keyEight"
+                class="number btn">
+                8
+              </button>
+              <button
+                id="keyNine"
+                class="number btn">
+                9
+              </button>
+              <button
+                id="keyAdd"
+                class="operator add btn">
+                +
+              </button>
+
+              <button
+                id="keyFour"
+                class="number btn">
+                4
+              </button>
+              <button
+                id="keyFive"
+                class="number btn">
+                5
+              </button>
+              <button
+                id="keySix"
+                class="number btn">
+                6
+              </button>
+
+              <button
+                id="keyOne"
+                class="number btn">
+                1
+              </button>
+              <button
+                id="keyTwo"
+                class="number btn">
+                2
+              </button>
+              <button
+                id="keyThree"
+                class="number btn">
+                3
+              </button>
+              <button
+                id="keyCalculate"
+                class="calculate btn">
+                =
+              </button>
+
+              <button
+                id="keyZero"
+                class="number btn">
+                0
+              </button>
+              <button
+                id="keyDecimalPoint"
+                class="number btn fw-bold">
+                .
+              </button>
+            </section>
+          </div>
+
+          <div class="btnUndoRedo">
+            <a
+              href="#"
+              class="btnUndo btn">
+              <i class="bi bi-arrow-90deg-left"></i>
+            </a>
+
+            <a
+              href="#"
+              class="btnRedo btn">
+              <i class="bi bi-arrow-90deg-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <p class="session">Session: Saturday - July 1, 2023 - 12:59 PM</p>
+      </div>
     </main>
   </body>
 </html>
