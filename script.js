@@ -10,6 +10,7 @@ const initializeCalculatorApp = () => {
 
   let previousValue = document.querySelector(".prevValue");
   let currentValue = document.querySelector(".currValue");
+  let history = document.querySelector(".history");
 
   let itemsArr = [];
   let equationArr = [];
@@ -20,16 +21,11 @@ const initializeCalculatorApp = () => {
   const btnSubmit = document.querySelector(".btnSubmit");
   btnSubmit.addEventListener("click", () => {
     let nickname = document.querySelector(".nickname").value;
-    let greeting = document.querySelector(".greeting");
+    let lblNickname = document.querySelector(".lblNickname");
     let session = document.querySelector(".session");
 
-    let formContainer = document.querySelector(".formContainer");
-    let mainContainer = document.querySelector(".mainContainer");
-
-    greeting.innerText = `Hello, ${nickname}`;
-
-    formContainer.style.display = "none";
-    mainContainer.style.visibility = "visible";
+    // Check if the nickname field is empty or not
+    checkNickname(nickname, lblNickname);
 
     session.innerText = `Session: ${determineToday(today)} - ${determineMonth(
       month
@@ -38,24 +34,20 @@ const initializeCalculatorApp = () => {
 
   // Numpad Press Handler
   document.addEventListener("keypress", (event) => {
-    let numpadPress = Number(event.key);
-
-    if (isNaN(numpadPress) || event.key === null || event.key === " ") {
-      currentValue.value = currentValue.value;
-    } else {
+    if (Number(event.key) >= 0 || Number(event.key) <= 9) {
       if (newNumberFlag) {
-        currentValue.value = numpadPress;
+        currentValue.value = event.key;
         newNumberFlag = false;
       } else {
         currentValue.value =
-          currentValue.value === 0
-            ? numpadPress
-            : `${currentValue.value}${numpadPress}`;
+          currentValue.value == 0
+            ? event.key.trim()
+            : `${currentValue.value}${event.key}`;
       }
     }
   });
 
-  // Number Keys Handler
+  // Numpad Click Handler
   const numberKeys = document.querySelectorAll(".number");
   numberKeys.forEach((key) => {
     key.addEventListener("click", (event) => {
@@ -73,7 +65,15 @@ const initializeCalculatorApp = () => {
     });
   });
 
-  // Clear Keys Handler
+  // Clear Press Handler
+  document.addEventListener("keypress", (event) => {
+    // Alternative for Clear
+    if (event.key === "Delete") {
+      currentValue.value = 0;
+    }
+  });
+
+  // Clear / Clear All Click Handler
   const clearKeys = document.querySelectorAll(".allClear, .clear");
   clearKeys.forEach((key) => {
     key.addEventListener("click", (event) => {
@@ -86,7 +86,14 @@ const initializeCalculatorApp = () => {
     });
   });
 
-  // Delete Key Handler
+  // Delete Press Handler
+  document.addEventListener("keydown", (event) => {
+    if (event.keyCode === 8) {
+      currentValue.value = currentValue.value.slice(0, -1);
+    }
+  });
+
+  // Delete Click Handler
   const deleteKey = document.querySelector(".delete");
   deleteKey.addEventListener("click", () => {
     // Slice the last item off the series of characters
@@ -150,7 +157,16 @@ const initializeCalculatorApp = () => {
         // Continuous operation using the result of the previous equation
         itemsArr = [newValue, newOperator];
         newNumberFlag = true;
-        console.log(equationArr);
+        // console.log(equationArr);
+
+        // Append to History Panel
+        let lastEquation = document.createElement("p");
+
+        lastEquation.innerText = `${equationArr.at(-1).num1}\n${
+          equationArr.at(-1).oper
+        } ${equationArr.at(-1).num2}\n--------`;
+
+        history.appendChild(lastEquation);
       }
     });
   });
@@ -196,8 +212,33 @@ const initializeCalculatorApp = () => {
 
     itemsArr = [];
     newNumberFlag = true;
-    console.log(equationArr);
+    // console.log(equationArr);
+
+    // Append to History Panel
+    let lastEquation = document.createElement("p");
+
+    lastEquation.innerText = `${equationArr.at(-1).num1}\n${
+      equationArr.at(-1).oper
+    } ${equationArr.at(-1).num2}\n--------`;
+
+    history.appendChild(lastEquation);
   });
+};
+
+const checkNickname = (nickname, lblNickname) => {
+  if (nickname) {
+    let greeting = document.querySelector(".greeting");
+    let formContainer = document.querySelector(".formContainer");
+    let mainContainer = document.querySelector(".mainContainer");
+
+    greeting.innerText = `Hello, ${nickname}`;
+
+    formContainer.style.display = "none";
+    mainContainer.style.visibility = "visible";
+  } else {
+    lblNickname.innerText = "Please enter a nickname";
+    lblNickname.style.color = "rgb(150, 65, 60)";
+  }
 };
 
 const determineToday = (today) => {

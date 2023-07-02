@@ -123,6 +123,11 @@
   border: 1px solid rgb(180, 180, 180);
 }
 
+.history p {
+  margin: 0;
+  padding: 0;
+}
+
 .panelCalculator {
   padding-top: 10px;
   width: 100%;
