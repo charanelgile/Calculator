@@ -44,6 +44,8 @@
   height: 100vh;
   display: flex;
   visibility: hidden;
+  position: absolute;
+  top: 0;
 }
 
 .panelHistory .btnBurger,
