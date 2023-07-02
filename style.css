@@ -10,16 +10,46 @@
   box-sizing: inherit;
 }
 
+.formContainer {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formContainer div {
+  width: 350px;
+  padding: 25px 30px;
+  font-size: 115%;
+  background-color: rgb(235, 235, 235);
+}
+
+.lblNickname {
+  margin-bottom: 10px;
+}
+
+.formContainer .btnSubmit {
+  width: 100%;
+  margin: 12px 0;
+  color: rgb(235, 235, 235);
+  background-color: rgb(63, 64, 80);
+}
+
+.btnSubmit:hover {
+  background-color: rgb(75, 90, 110);
+}
+
 .mainContainer {
   width: 100vw;
   height: 100vh;
   display: flex;
+  visibility: hidden;
 }
 
 .panelHistory .btnBurger,
 .panelCalculator .btnClose {
   padding: 0 30px;
-  font-size: 270%;
+  font-size: 200%;
 }
 
 .panelHistory {
@@ -37,7 +67,7 @@
 }
 
 .panelHistory nav a {
-  font-size: 200%;
+  font-size: 120%;
   padding: 8px 35px;
 }
 
@@ -50,7 +80,7 @@
 }
 
 .divButtonsHistory {
-  padding: 25px 50px;
+  padding: 15px 50px;
   display: flex;
   justify-content: flex-end;
 }
@@ -63,7 +93,7 @@
 .btnCopy,
 .btnShare,
 .btnDownload {
-  font-size: 25px;
+  font-size: 20px;
   margin: 0 15px 15px;
   color: rgb(235, 235, 235) !important;
 }
@@ -77,18 +107,19 @@
 }
 
 .btnDownload {
-  background-color: rgb(170, 85, 80);
+  background-color: rgb(150, 65, 60);
 }
 
 .history {
   width: 200px;
-  height: 480px;
+  height: 410px;
   padding: 15px 20px;
   text-align: right;
   overflow-y: scroll;
   border-radius: 7px;
   color: rgb(63, 64, 80);
   background-color: white;
+  font-family: "Martian Mono", monospace;
   border: 1px solid rgb(180, 180, 180);
 }
 
@@ -116,20 +147,14 @@
 
 .greeting {
   margin-right: 80px;
-  font-size: 65px;
+  font-size: 55px;
   line-height: 85%;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   color: rgb(235, 235, 235);
 }
 
 .divUndoRedoCalculator {
   display: flex;
-}
-
-.divUndoRedoCalculator + p {
-  font-size: 110%;
-  margin: 10px 0 0 6px;
-  color: rgb(235, 235, 235);
 }
 
 .btnUndoRedo {
@@ -140,7 +165,7 @@
 .btnUndo,
 .btnRedo {
   color: white;
-  font-size: 30px;
+  font-size: 20px;
   margin: 15px 0 0 15px;
   background-color: rgb(23, 126, 137);
 }
@@ -151,22 +176,38 @@
   background-color: rgb(51, 115, 161);
 }
 
+.btnCopy:hover,
+.btnUndo:hover {
+  background-color: rgb(35, 155, 160);
+}
+
+.btnShare:hover,
+.btnRedo:hover {
+  background-color: rgb(58, 140, 178);
+}
+
+.divUndoRedoCalculator + p {
+  margin: 10px 0 0 3px;
+  color: rgb(235, 235, 235);
+}
+
 .calculator {
-  width: 335px;
+  width: 295px;
   padding: 20px;
-  margin-left: 5px;
+  margin-left: 3px;
   border-radius: 15px;
   background-color: rgb(200, 200, 200);
 }
 
 .calculator .calculatorDisplay {
   width: 100%;
+  font-family: "Martian Mono", monospace;
 }
 
 .calculator .calculatorDisplay .prevValue {
   width: 100%;
   height: 30px;
-  font-size: 20px;
+  font-size: 15px;
   padding: 5px 10px;
   display: flex;
   align-items: center;
@@ -178,10 +219,10 @@
 
 .calculator .calculatorDisplay .currValue {
   width: 100%;
-  height: 55px;
-  font-size: 45px;
+  height: 50px;
+  font-size: 35px;
   text-align: right;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
   border-radius: 0 0 7px 7px;
   padding: 0px 10px 10px 10px;
 }
@@ -194,8 +235,8 @@
 }
 
 .calculator .calculatorKeys button {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border: none;
   font-size: 1.2rem;
   text-align: center;
@@ -206,40 +247,30 @@
 .delete,
 .allClear {
   color: white;
-  background-color: rgb(57, 128, 172) !important;
-  background-color: rgb(159, 52, 45) !important;
+  background-color: rgb(150, 65, 60) !important;
 }
 
 .clear:hover,
 .delete:hover,
-.allClear:hover {
-  color: white;
-  background-color: rgb(39, 113, 165) !important;
-}
-
-.operator,
-.calculate {
-  color: white;
-  background-color: rgb(244, 154, 45) !important;
-  color: white;
-  background-color: rgb(63, 64, 80) !important;
-}
-
-.operator:hover,
-.calculate:hover {
-  background-color: rgb(250, 180, 50) !important;
+.allClear:hover,
+.btnDownload:hover {
+  background-color: rgb(190, 70, 65) !important;
 }
 
 .number,
+.operator,
+.calculate,
 .changeSign {
-  background-color: rgb(240, 240, 240) !important;
   color: white;
   background-color: rgb(63, 64, 80) !important;
 }
 
 .number:hover,
-.signChange:hover {
-  background-color: rgb(205, 205, 205) !important;
+.operator:hover,
+.calculate:hover,
+.changeSign:hover {
+  color: white;
+  background-color: rgb(75, 90, 110) !important;
 }
 
 #keyAllClear {
