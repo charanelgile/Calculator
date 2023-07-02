@@ -150,24 +150,29 @@ const initializeCalculatorApp = () => {
       currentValue.value = 0;
       previousValue.innerText = "";
 
-      // Append the result of the Equation Sequence with a Divider
-      // to indicate a New Set of Equations in the History Panel
-      let previousEquation = document.createElement("p");
-      previousEquation.innerText = `${currentEquation[0]}\n============\n`;
+      newOperator = "";
+      newNumberFlag = true;
 
-      history.appendChild(previousEquation);
+      if (!currentEquation[0]) {
+        currentEquation[0] = "0";
+      } else {
+        // Append the result of the last Equation Sequence with a Divider
+        // to indicate a New Set of Equation Sequence in the History Panel
+        let previousEquation = document.createElement("p");
+        previousEquation.innerText = `${currentEquation[0]}\n============\n`;
+
+        history.appendChild(previousEquation);
+      }
 
       stringEquation = "";
       currentEquation = [];
       convertEquation = {};
 
-      console.log(historyEquations);
+      // console.log(historyEquations);
 
       if (event.target.classList.contains("allClear")) {
-        currentEquation = [];
         historyEquations = [];
         history.innerHTML = "";
-        previousValue.innerText = "";
 
         // console.log(`Current Equation\n${currentEquation}`);
         // console.log(`All Time Equation\n${historyEquations}`);
@@ -195,6 +200,25 @@ const initializeCalculatorApp = () => {
 
     if (currentValue.value === "") {
       currentValue.value = 0;
+      previousValue.innerText = "";
+
+      newOperator = "";
+      newNumberFlag = true;
+
+      if (!currentEquation[0]) {
+        currentEquation[0] = "0";
+      } else {
+        // Append the result of the last Equation Sequence with a Divider
+        // to indicate a New Set of Equation Sequence in the History Panel
+        let previousEquation = document.createElement("p");
+        previousEquation.innerText = `${currentEquation[0]}\n============\n`;
+
+        history.appendChild(previousEquation);
+      }
+
+      stringEquation = "";
+      currentEquation = [];
+      convertEquation = {};
     }
   });
 
