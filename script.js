@@ -25,133 +25,15 @@ const initializeCalculatorApp = () => {
   let newNumberInput = "";
   let newNumberFlag = false;
 
-  let stringEquation = ""; // equationStr
+  let stringEquation = "";
 
-  let currentEquation = []; // itemsArr
-  let convertEquation = {}; // equationObj
-  let historyEquations = []; // equationArr
+  let currentEquation = [];
+  let convertEquation = {};
+  let historyEquations = [];
 
-  let recentEquation = {}; // lastEquation
+  let recentEquation = {};
 
   let history = document.querySelector(".history");
-
-  // Calculate Key Handler
-  const calculateKey = document.querySelector(".calculate");
-  calculateKey.addEventListener("click", () => {
-    // Continuous evaluation when the calculate key is clicked repeatedly
-    if (!currentEquation.length && historyEquations.length) {
-      // When there is no Current Equation, but there is one historically stored, get the Recent Equation from the History of Equations
-      recentEquation = historyEquations[historyEquations.length - 1];
-
-      // Combine the Recent Equation and Current Value into one Object
-      convertEquation = {
-        fnum: parseFloat(currentValue.value),
-        oper: recentEquation.oper,
-        snum: recentEquation.snum,
-      };
-    } else if (!currentEquation.length) {
-      return currentValue.value;
-    } else {
-      // Store the Second Number into Current Equation Array
-      currentEquation.push(currentValue.value);
-
-      // Convert the Current Equation Array into an Object
-      convertEquation = {
-        fnum: parseFloat(currentEquation[0]),
-        oper: currentEquation[1],
-        snum: parseFloat(currentEquation[2]),
-      };
-    }
-
-    // Store the Converted Equation into the History of Equations
-    historyEquations.push(convertEquation);
-
-    // Concatinate the Equation into a single String
-    stringEquation = `${convertEquation["fnum"]} ${convertEquation["oper"]} ${convertEquation["snum"]}`;
-
-    // Calculate the New Value to be displayed
-    calculate(stringEquation, currentValue);
-
-    previousValue.innerText = `${stringEquation} =`;
-
-    currentEquation = [];
-    newNumberFlag = true;
-
-    // Append the Recent Equation to the History Panel
-    let previousEquation = document.createElement("p");
-    previousEquation.innerText = `${convertEquation.fnum}\n${convertEquation.oper} ${convertEquation.snum}\n------------`;
-
-    history.appendChild(previousEquation);
-
-    console.log(stringEquation);
-    // console.log(currentEquation);
-    console.log(convertEquation);
-    // console.log(historyEquations);
-  });
-
-  // Operator Keys Handler ***********************************
-  const operatorKeys = document.querySelectorAll(".operator");
-  operatorKeys.forEach((oprtrKey) => {
-    oprtrKey.addEventListener("click", (event) => {
-      // Cleanup the Current Equation Array everytime a New Operator is selected
-      if (newNumberFlag) {
-        currentEquation = [];
-      }
-
-      newOperator = event.target.innerText;
-
-      // Return last value or number, when an operator key is clicked without a first number
-      if (!currentEquation.length && currentValue.value == 0) return;
-
-      // Begin a new operation
-      if (!currentEquation.length) {
-        // Store the First Number and Operator into Current Equation Array
-        currentEquation.push(currentValue.value, newOperator);
-        previousValue.innerText = `${currentValue.value} ${newOperator}`;
-        // Replace the number on the input box to avoid accidental concatination
-        return (newNumberFlag = true);
-      }
-
-      // Complete the operation
-      if (currentEquation.length) {
-        // Store the Second Number into Current Equation Array
-        currentEquation.push(currentValue.value);
-
-        // Convert the Current Equation Array into an Object
-        convertEquation = {
-          fnum: parseFloat(currentEquation[0]),
-          oper: currentEquation[1],
-          snum: parseFloat(currentEquation[2]),
-        };
-
-        // Store the Converted Equation into the History of Equations
-        historyEquations.push(convertEquation);
-
-        // Concatinate the Equation into a single String
-        stringEquation = `${convertEquation["fnum"]} ${convertEquation["oper"]} ${convertEquation["snum"]}`;
-
-        // Calculate the New Value to be displayed
-        newValue = calculate(stringEquation, currentValue);
-
-        previousValue.innerText = `${newValue} ${newOperator}`;
-
-        // Continuous operation using the result of the previous equation
-        currentEquation = [newValue, newOperator];
-        newNumberFlag = true;
-
-        // Append the Recent Equation to the History Panel
-        let previousEquation = document.createElement("p");
-        previousEquation.innerText = `${convertEquation.fnum}\n${convertEquation.oper} ${convertEquation.snum}\n------------`;
-
-        history.appendChild(previousEquation);
-
-        console.log(stringEquation);
-        // console.log(currentEquation);
-        console.log(convertEquation);
-        // console.log(historyEquations);
-      }
-    });
-  });
 
   // Show the Calculator App, once a Nickname has been provided **********
   const btnSubmit = document.querySelector(".btnSubmit");
@@ -316,6 +198,156 @@ const initializeCalculatorApp = () => {
     currentValue.value = parseFloat(currentValue.value) * -1;
   });
 
+  // Operator Keys Handler ***********************************
+  const operatorKeys = document.querySelectorAll(".operator");
+  operatorKeys.forEach((oprtrKey) => {
+    oprtrKey.addEventListener("click", (event) => {
+      // Cleanup the Current Equation Array everytime a New Operator is selected
+      if (newNumberFlag) {
+        currentEquation = [];
+      }
+
+      newOperator = event.target.innerText;
+
+      // Return last value or number, when an operator key is clicked without a first number
+      if (!currentEquation.length && currentValue.value == 0) return;
+
+      // Begin a new operation
+      if (!currentEquation.length) {
+        // Store the First Number and Operator into Current Equation Array
+        currentEquation.push(currentValue.value, newOperator);
+        previousValue.innerText = `${currentValue.value} ${newOperator}`;
+        // Replace the number on the input box to avoid accidental concatination
+        return (newNumberFlag = true);
+      }
+
+      // Complete the operation
+      if (currentEquation.length) {
+        // Store the Second Number into Current Equation Array
+        currentEquation.push(currentValue.value);
+
+        // Convert the Current Equation Array into an Object
+        convertEquation = {
+          fnum: parseFloat(currentEquation[0]),
+          oper: currentEquation[1],
+          snum: parseFloat(currentEquation[2]),
+        };
+
+        // Store the Converted Equation into the History of Equations
+        historyEquations.push(convertEquation);
+
+        // Concatinate the Equation into a single String
+        stringEquation = `${convertEquation["fnum"]} ${convertEquation["oper"]} ${convertEquation["snum"]}`;
+
+        // Calculate the New Value to be displayed
+        newValue = calculate(stringEquation, currentValue);
+
+        previousValue.innerText = `${newValue} ${newOperator}`;
+
+        // Continuous operation using the result of the previous equation
+        currentEquation = [newValue, newOperator];
+        newNumberFlag = true;
+
+        // Append the Recent Equation to the History Panel
+        let previousEquation = document.createElement("p");
+        previousEquation.innerText = `${convertEquation.fnum}\n${convertEquation.oper} ${convertEquation.snum}\n------------`;
+
+        history.appendChild(previousEquation);
+
+        // console.log(stringEquation);
+        // console.log(currentEquation);
+        // console.log(convertEquation);
+        // console.log(historyEquations);
+      }
+    });
+  });
+
+  // Calculate Key Handler *********************************
+  const calculateKey = document.querySelector(".calculate");
+  calculateKey.addEventListener("click", () => {
+    // Continuous evaluation when the calculate key is clicked repeatedly
+    if (!currentEquation.length && historyEquations.length) {
+      // When there is no Current Equation, but there is one historically stored, get the Recent Equation from the History of Equations
+      recentEquation = historyEquations[historyEquations.length - 1];
+
+      // Combine the Recent Equation and Current Value into one Object
+      convertEquation = {
+        fnum: parseFloat(currentValue.value),
+        oper: recentEquation.oper,
+        snum: recentEquation.snum,
+      };
+    } else if (!currentEquation.length) {
+      return currentValue.value;
+    } else {
+      // Store the Second Number into Current Equation Array
+      currentEquation.push(currentValue.value);
+
+      // Convert the Current Equation Array into an Object
+      convertEquation = {
+        fnum: parseFloat(currentEquation[0]),
+        oper: currentEquation[1],
+        snum: parseFloat(currentEquation[2]),
+      };
+    }
+
+    // Store the Converted Equation into the History of Equations
+    historyEquations.push(convertEquation);
+
+    // Concatinate the Equation into a single String
+    stringEquation = `${convertEquation["fnum"]} ${convertEquation["oper"]} ${convertEquation["snum"]}`;
+
+    // Calculate the New Value to be displayed
+    calculate(stringEquation, currentValue);
+
+    previousValue.innerText = `${stringEquation} =`;
+
+    currentEquation = [];
+    newNumberFlag = true;
+
+    // Append the Recent Equation to the History Panel
+    let previousEquation = document.createElement("p");
+    previousEquation.innerText = `${convertEquation.fnum}\n${convertEquation.oper} ${convertEquation.snum}\n------------`;
+
+    history.appendChild(previousEquation);
+
+    // console.log(stringEquation);
+    // console.log(currentEquation);
+    // console.log(convertEquation);
+    // console.log(historyEquations);
+  });
+
+  // Close the Calculator App *************************
+  const btnClose = document.querySelector(".btnClose");
+  btnClose.addEventListener("click", () => {
+    lblNickname.innerText = "Enter your nickname:";
+    lblNickname.style.color = "black";
+    nickname.value = "";
+
+    greeting.innerText = "";
+    session.innerText = "";
+
+    previousValue.innerText = "";
+    currentValue.value = 0;
+    newValue = 0;
+
+    newOperator = "";
+    newNumberInput = "";
+    newNumberFlag = false;
+
+    stringEquation = "";
+
+    currentEquation = [];
+    convertEquation = {};
+    historyEquations = [];
+
+    recentEquation = {};
+
+    history.innerHTML = "";
+
+    formContainer.style.display = "flex";
+    mainContainer.style.visibility = "hidden";
+  });
+
   // -------------------------------------------------------------------
 
   // Numpad Keyboard Press Handler
@@ -331,32 +363,6 @@ const initializeCalculatorApp = () => {
             : `${currentValue.value}${event.key}`;
       }
     }
-  });
-
-  // Close the Calculator App
-  const btnClose = document.querySelector(".btnClose");
-  btnClose.addEventListener("click", () => {
-    let formContainer = document.querySelector(".formContainer");
-    let mainContainer = document.querySelector(".mainContainer");
-
-    let lblNickname = document.querySelector(".lblNickname");
-    let nickname = document.querySelector(".nickname");
-    let greeting = document.querySelector(".greeting");
-    let session = document.querySelector(".session");
-
-    itemsArr = [];
-    equationArr = [];
-    history.innerHTML = "";
-    currentValue.value = 0;
-    previousValue.innerText = "";
-    nickname.value = "";
-    greeting.innerText = "";
-    session.innerText = "";
-    lblNickname.innerText = "Enter your nickname:";
-    lblNickname.style.color = "black";
-
-    formContainer.style.display = "flex";
-    mainContainer.style.visibility = "hidden";
   });
 };
 
@@ -532,7 +538,7 @@ const calculate = (stringEquation, currentValue) => {
   stringEquation.replace(regex, "");
 
   const divisionByZero = /(\/0)/.test(stringEquation);
-  console.log(divisionByZero);
+  // console.log(divisionByZero);
 
   if (divisionByZero) return (currentValue.value = 0);
 
