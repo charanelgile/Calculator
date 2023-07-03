@@ -140,6 +140,23 @@ const initializeCalculatorApp = () => {
     // Alternative for Clear (Ctrl + Backspace)
     if (event.key === "Delete") {
       currentValue.value = 0;
+      previousValue.innerText = "";
+
+      newOperator = "";
+      newNumberFlag = true;
+
+      if (currentEquation[0]) {
+        // Append the result of the last Equation Sequence with a Divider
+        // to indicate a New Set of Equation Sequence in the History Panel
+        let previousEquation = document.createElement("p");
+        previousEquation.innerText = `${currentEquation[0]}\n============\n`;
+
+        history.appendChild(previousEquation);
+      }
+
+      stringEquation = "";
+      currentEquation = [];
+      convertEquation = {};
     }
   });
 
@@ -153,9 +170,7 @@ const initializeCalculatorApp = () => {
       newOperator = "";
       newNumberFlag = true;
 
-      if (!currentEquation[0]) {
-        currentEquation[0] = "0";
-      } else {
+      if (currentEquation[0]) {
         // Append the result of the last Equation Sequence with a Divider
         // to indicate a New Set of Equation Sequence in the History Panel
         let previousEquation = document.createElement("p");
@@ -189,6 +204,23 @@ const initializeCalculatorApp = () => {
 
     if (currentValue.value === "") {
       currentValue.value = 0;
+      previousValue.innerText = "";
+
+      newOperator = "";
+      newNumberFlag = true;
+
+      if (currentEquation[0]) {
+        // Append the result of the last Equation Sequence with a Divider
+        // to indicate a New Set of Equation Sequence in the History Panel
+        let previousEquation = document.createElement("p");
+        previousEquation.innerText = `${currentEquation[0]}\n============\n`;
+
+        history.appendChild(previousEquation);
+      }
+
+      stringEquation = "";
+      currentEquation = [];
+      convertEquation = {};
     }
   });
 
@@ -205,9 +237,7 @@ const initializeCalculatorApp = () => {
       newOperator = "";
       newNumberFlag = true;
 
-      if (!currentEquation[0]) {
-        currentEquation[0] = "0";
-      } else {
+      if (currentEquation[0]) {
         // Append the result of the last Equation Sequence with a Divider
         // to indicate a New Set of Equation Sequence in the History Panel
         let previousEquation = document.createElement("p");
