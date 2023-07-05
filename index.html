@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
     <title>Calculator App</title>
 
     <!-- Bootstrap CSS and JavaScript -->
@@ -23,51 +25,88 @@
       crossorigin="anonymous" />
 
     <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@200;400&display=swap"
       rel="stylesheet" />
 
     <!-- Custom CSS and JavaScript -->
-    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="./style.css" />
 
-    <script src="./script.js" type="text/javascript" defer></script>
+    <script
+      src="./script.js"
+      type="text/javascript"
+      defer></script>
   </head>
   <body>
     <div class="formContainer container-fluid">
       <div class="border border-1 rounded rounded-3">
-        <label class="lblNickname" for="nickname">Enter your nickname:</label>
+        <label
+          class="lblNickname"
+          for="nickname"
+          >Enter your nickname:</label
+        >
         <input
+          id="nickname"
           type="text"
           name="nickname"
           class="nickname form-control"
           onkeyup="this.value = this.value.toString().trim();"
           autofocus />
-        <button type="button" class="btnSubmit btn">Submit</button>
+        <button
+          type="button"
+          class="btnSubmit btn">
+          Submit
+        </button>
       </div>
     </div>
 
     <main class="mainContainer w-100 m-0 p-0">
       <div class="panelHistory">
-        <a href="#" class="btnBurger"><i class="bi bi-list"></i></a>
+        <a
+          href="#"
+          class="btnBurger"
+          ><i class="bi bi-list"></i
+        ></a>
 
         <nav>
-          <a href="#" class="navHome">Home</a>
-          <a href="#" class="navSupport">Support / Contribute</a>
+          <a
+            href="#"
+            class="navHome"
+            >Home</a
+          >
+          <a
+            href="#"
+            class="navSupport"
+            >Support / Contribute</a
+          >
         </nav>
 
         <div class="divButtonsHistory">
           <section class="btnActions">
-            <a href="#" class="btnCopy btn">
+            <a
+              href="#"
+              class="btnCopy btn">
               <i class="bi bi-clipboard-fill"></i>
             </a>
 
-            <a href="#" class="btnShare btn">
+            <a
+              href="#"
+              class="btnShare btn">
               <i class="bi bi-share-fill"></i>
             </a>
 
-            <a href="#" class="btnDownload btn">
+            <a
+              href="#"
+              class="btnDownload btn">
               <i class="bi bi-cloud-arrow-down-fill"></i>
             </a>
           </section>
@@ -80,7 +119,11 @@
 
       <div class="panelCalculator">
         <div>
-          <a href="#" class="btnClose"><i class="bi bi-x-lg"></i></a>
+          <a
+            href="#"
+            class="btnClose"
+            ><i class="bi bi-x-lg"></i
+          ></a>
         </div>
 
         <h1 class="greeting fw-bolder"></h1>
@@ -92,6 +135,7 @@
               <div class="prevValue border border-0"></div>
 
               <input
+                name="currentValue"
                 type="text"
                 value="0"
                 class="currValue border border-0"
@@ -99,42 +143,124 @@
             </section>
 
             <section class="calculatorKeys">
-              <button id="keyAllClear" class="allClear btn">AC</button>
-              <button id="keyClear" class="clear btn">C</button>
-              <button id="keyDelete" class="delete btn">
+              <button
+                id="keyAllClear"
+                class="allClear btn">
+                AC
+              </button>
+              <button
+                id="keyClear"
+                class="clear btn">
+                C
+              </button>
+              <button
+                id="keyDelete"
+                class="delete btn">
                 <i class="bi bi-backspace-fill"></i>
               </button>
 
-              <button id="keyChangeSign" class="changeSign btn">+/-</button>
-              <button id="keyDivide" class="operator divide btn">/</button>
-              <button id="keyMultiply" class="operator multiply btn">*</button>
-              <button id="keySubtract" class="operator subtract btn">-</button>
+              <button
+                id="keyChangeSign"
+                class="changeSign btn">
+                +/-
+              </button>
+              <button
+                id="keyDivide"
+                class="operator divide btn">
+                /
+              </button>
+              <button
+                id="keyMultiply"
+                class="operator multiply btn">
+                *
+              </button>
+              <button
+                id="keySubtract"
+                class="operator subtract btn">
+                -
+              </button>
 
-              <button id="keySeven" class="number btn">7</button>
-              <button id="keyEight" class="number btn">8</button>
-              <button id="keyNine" class="number btn">9</button>
-              <button id="keyAdd" class="operator add btn">+</button>
+              <button
+                id="keySeven"
+                class="number btn">
+                7
+              </button>
+              <button
+                id="keyEight"
+                class="number btn">
+                8
+              </button>
+              <button
+                id="keyNine"
+                class="number btn">
+                9
+              </button>
+              <button
+                id="keyAdd"
+                class="operator add btn">
+                +
+              </button>
 
-              <button id="keyFour" class="number btn">4</button>
-              <button id="keyFive" class="number btn">5</button>
-              <button id="keySix" class="number btn">6</button>
+              <button
+                id="keyFour"
+                class="number btn">
+                4
+              </button>
+              <button
+                id="keyFive"
+                class="number btn">
+                5
+              </button>
+              <button
+                id="keySix"
+                class="number btn">
+                6
+              </button>
 
-              <button id="keyOne" class="number btn">1</button>
-              <button id="keyTwo" class="number btn">2</button>
-              <button id="keyThree" class="number btn">3</button>
-              <button id="keyCalculate" class="calculate btn">=</button>
+              <button
+                id="keyOne"
+                class="number btn">
+                1
+              </button>
+              <button
+                id="keyTwo"
+                class="number btn">
+                2
+              </button>
+              <button
+                id="keyThree"
+                class="number btn">
+                3
+              </button>
+              <button
+                id="keyCalculate"
+                class="calculate btn">
+                =
+              </button>
 
-              <button id="keyZero" class="number btn">0</button>
-              <button id="keyDecimalPoint" class="number btn fw-bold">.</button>
+              <button
+                id="keyZero"
+                class="number btn">
+                0
+              </button>
+              <button
+                id="keyDecimalPoint"
+                class="number btn fw-bold">
+                .
+              </button>
             </section>
           </div>
 
           <div class="btnUndoRedo">
-            <a href="#" class="btnUndo btn">
+            <a
+              href="#"
+              class="btnUndo btn">
               <i class="bi bi-arrow-90deg-left"></i>
             </a>
 
-            <a href="#" class="btnRedo btn">
+            <a
+              href="#"
+              class="btnRedo btn">
               <i class="bi bi-arrow-90deg-right"></i>
             </a>
           </div>

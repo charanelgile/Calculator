@@ -35,6 +35,8 @@ const initializeCalculatorApp = () => {
 
   let history = document.querySelector(".history");
 
+  let calculateKeyPressed = false;
+
   // Show the Calculator App, once a Nickname has been provided **********
   const btnSubmit = document.querySelector(".btnSubmit");
   btnSubmit.addEventListener("click", () => {
@@ -51,9 +53,12 @@ const initializeCalculatorApp = () => {
   });
 
   // Get the Session Date & Time ************************************
-  session.innerText = `Session: ${determineToday(today)} - ${determineMonth(
-    month
-  )} ${date}, ${year} - ${determineTime(hours, minutes)}`;
+  session.innerText = `Session: ${determineToday(
+    today
+  )} - ${determineMonth(month)} ${date}, ${year} - ${determineTime(
+    hours,
+    minutes
+  )}`;
 
   // Numpad Mouse Click Handler **************************
   const numberKeys = document.querySelectorAll(".number");
@@ -70,12 +75,28 @@ const initializeCalculatorApp = () => {
             ? newNumberInput.trim()
             : `${currentValue.value}${newNumberInput}`;
       }
+
+      if (calculateKeyPressed && newValue != currentValue.value) {
+        // Append the result of the last Equation Sequence with a Divider
+        // to indicate a New Set of Equation Sequence in the History Panel
+        let previousEquation = document.createElement("p");
+        previousEquation.innerText = `${newValue}\n============\n`;
+
+        history.appendChild(previousEquation);
+        previousValue.innerText = "";
+        newNumberFlag = false;
+      }
+
+      calculateKeyPressed = false;
+      console.log(`From numpad: ${calculateKeyPressed}`);
     });
   });
 
   // Clear Keyboard Press Handler ******************
   document.addEventListener("keypress", (event) => {
-    // Alternative for Clear (Ctrl + Backspace)
+    // Alternative for Clear
+    // Windows: (Ctrl + Backspace)
+    // Mac: (Opt + Cmd + Backspace)
     if (event.key === "Delete") {
       currentValue.value = 0;
       previousValue.innerText = "";
@@ -83,11 +104,11 @@ const initializeCalculatorApp = () => {
       newOperator = "";
       newNumberFlag = true;
 
-      if (currentEquation[0]) {
+      if (currentEquation[0] && calculateKeyPressed) {
         // Append the result of the last Equation Sequence with a Divider
         // to indicate a New Set of Equation Sequence in the History Panel
         let previousEquation = document.createElement("p");
-        previousEquation.innerText = `${currentEquation[0]}\n============\n`;
+        previousEquation.innerText = `${newValue}\n============\n`;
 
         history.appendChild(previousEquation);
       }
@@ -96,6 +117,9 @@ const initializeCalculatorApp = () => {
       currentEquation = [];
       convertEquation = {};
     }
+
+    calculateKeyPressed = false;
+    console.log(`From clear keypress: ${calculateKeyPressed}`);
   });
 
   // Clear & Clear All Mouse Click Handlers ***********************
@@ -108,11 +132,11 @@ const initializeCalculatorApp = () => {
       newOperator = "";
       newNumberFlag = true;
 
-      if (currentEquation[0]) {
+      if (currentEquation[0] && calculateKeyPressed) {
         // Append the result of the last Equation Sequence with a Divider
         // to indicate a New Set of Equation Sequence in the History Panel
         let previousEquation = document.createElement("p");
-        previousEquation.innerText = `${currentEquation[0]}\n============\n`;
+        previousEquation.innerText = `${newValue}\n============\n`;
 
         history.appendChild(previousEquation);
       }
@@ -130,6 +154,9 @@ const initializeCalculatorApp = () => {
         // console.log(`Current Equation\n${currentEquation}`);
         // console.log(`All Time Equation\n${historyEquations}`);
       }
+
+      calculateKeyPressed = false;
+      console.log(`From clear mouse click: ${calculateKeyPressed}`);
     });
   });
 
@@ -147,11 +174,11 @@ const initializeCalculatorApp = () => {
       newOperator = "";
       newNumberFlag = true;
 
-      if (currentEquation[0]) {
+      if (currentEquation[0] || calculateKeyPressed) {
         // Append the result of the last Equation Sequence with a Divider
         // to indicate a New Set of Equation Sequence in the History Panel
         let previousEquation = document.createElement("p");
-        previousEquation.innerText = `${currentEquation[0]}\n============\n`;
+        previousEquation.innerText = `${newValue}\n============\n`;
 
         history.appendChild(previousEquation);
       }
@@ -160,6 +187,9 @@ const initializeCalculatorApp = () => {
       currentEquation = [];
       convertEquation = {};
     }
+
+    calculateKeyPressed = false;
+    console.log(`From delete keypress: ${calculateKeyPressed}`);
   });
 
   // Delete Mouse Click Handler **********************
@@ -175,11 +205,11 @@ const initializeCalculatorApp = () => {
       newOperator = "";
       newNumberFlag = true;
 
-      if (currentEquation[0]) {
+      if (currentEquation[0] || calculateKeyPressed) {
         // Append the result of the last Equation Sequence with a Divider
         // to indicate a New Set of Equation Sequence in the History Panel
         let previousEquation = document.createElement("p");
-        previousEquation.innerText = `${currentEquation[0]}\n============\n`;
+        previousEquation.innerText = `${newValue}\n============\n`;
 
         history.appendChild(previousEquation);
       }
@@ -188,6 +218,9 @@ const initializeCalculatorApp = () => {
       currentEquation = [];
       convertEquation = {};
     }
+
+    calculateKeyPressed = false;
+    console.log(`From delete mouse click: ${calculateKeyPressed}`);
   });
 
   // Change Sign Mouse Click Handler *************************
@@ -196,6 +229,9 @@ const initializeCalculatorApp = () => {
     // Ensure the series of characters is a number with parseFloat()
     // Multiply by -1 to achieve the Positive to Negative switch, and vice versa
     currentValue.value = parseFloat(currentValue.value) * -1;
+
+    calculateKeyPressed = false;
+    console.log(`From change sign: ${calculateKeyPressed}`);
   });
 
   // Operator Keys Handler ***********************************
@@ -205,6 +241,9 @@ const initializeCalculatorApp = () => {
       // Cleanup the Current Equation Array everytime a New Operator is selected
       if (newNumberFlag) {
         currentEquation = [];
+
+        calculateKeyPressed = false;
+        console.log(`2 from operator: ${calculateKeyPressed}`);
       }
 
       newOperator = event.target.innerText;
@@ -259,6 +298,9 @@ const initializeCalculatorApp = () => {
         // console.log(convertEquation);
         // console.log(historyEquations);
       }
+
+      calculateKeyPressed = false;
+      console.log(`1 from operator: ${calculateKeyPressed}`);
     });
   });
 
@@ -297,11 +339,11 @@ const initializeCalculatorApp = () => {
     stringEquation = `${convertEquation["fnum"]} ${convertEquation["oper"]} ${convertEquation["snum"]}`;
 
     // Calculate the New Value to be displayed
-    calculate(stringEquation, currentValue);
+    newValue = calculate(stringEquation, currentValue);
 
     previousValue.innerText = `${stringEquation} =`;
 
-    currentEquation = [];
+    // currentEquation = [];
     newNumberFlag = true;
 
     // Append the Recent Equation to the History Panel
@@ -310,6 +352,8 @@ const initializeCalculatorApp = () => {
 
     history.appendChild(previousEquation);
 
+    calculateKeyPressed = true;
+    console.log(`From equals: ${calculateKeyPressed}`);
     // console.log(stringEquation);
     // console.log(currentEquation);
     // console.log(convertEquation);
@@ -362,6 +406,20 @@ const initializeCalculatorApp = () => {
             ? event.key.trim()
             : `${currentValue.value}${event.key}`;
       }
+
+      if (calculateKeyPressed && newValue != currentValue.value) {
+        // Append the result of the last Equation Sequence with a Divider
+        // to indicate a New Set of Equation Sequence in the History Panel
+        let previousEquation = document.createElement("p");
+        previousEquation.innerText = `${newValue}\n============\n`;
+
+        history.appendChild(previousEquation);
+
+        newNumberFlag = false;
+      }
+
+      calculateKeyPressed = false;
+      console.log(`From numpad: ${calculateKeyPressed}`);
     }
   });
 };
