@@ -33,9 +33,9 @@ const initializeCalculatorApp = () => {
 
   let recentEquation = {};
 
-  let history = document.querySelector(".history");
-
   let calculateKeyPressed = false;
+
+  let history = document.querySelector(".history");
 
   // Show the Calculator App, once a Nickname has been provided **********
   const btnSubmit = document.querySelector(".btnSubmit");
@@ -79,13 +79,14 @@ const initializeCalculatorApp = () => {
       if (calculateKeyPressed && newValue != currentValue.value) {
         // Append the result of the last Equation Sequence with a Divider
         // to indicate a New Set of Equation Sequence in the History Panel
-        let previousEquation = document.createElement("p");
-        previousEquation.innerText = `${newValue}\n============\n`;
+        let result = document.createElement("p");
+        result.innerText = `${newValue}\n============\n`;
 
-        history.appendChild(previousEquation);
+        history.appendChild(result);
         previousValue.innerText = "";
         newNumberFlag = false;
 
+        // Prevent repetitive appending of the last result and current value, including zero
         newValue = 0;
       }
 
@@ -97,7 +98,6 @@ const initializeCalculatorApp = () => {
   document.addEventListener("keypress", (event) => {
     // Alternative for Clear
     // Windows: (Ctrl + Backspace)
-    // Mac: (Opt + Cmd + Backspace)
     if (event.key === "Delete") {
       currentValue.value = 0;
       previousValue.innerText = "";
@@ -108,11 +108,13 @@ const initializeCalculatorApp = () => {
       if (calculateKeyPressed || newValue != currentValue.value) {
         // Append the result of the last Equation Sequence with a Divider
         // to indicate a New Set of Equation Sequence in the History Panel
-        let previousEquation = document.createElement("p");
-        previousEquation.innerText = `${newValue}\n============\n`;
+        let result = document.createElement("p");
+        result.innerText = `${newValue}\n============\n`;
 
-        history.appendChild(previousEquation);
+        history.appendChild(result);
 
+        // Prevent repetitive appending of the last result and current value, including zero
+        // when the Clear Key is pressed repeatedly
         newValue = 0;
       }
 
@@ -137,11 +139,13 @@ const initializeCalculatorApp = () => {
       if (calculateKeyPressed || newValue != currentValue.value) {
         // Append the result of the last Equation Sequence with a Divider
         // to indicate a New Set of Equation Sequence in the History Panel
-        let previousEquation = document.createElement("p");
-        previousEquation.innerText = `${newValue}\n============\n`;
+        let result = document.createElement("p");
+        result.innerText = `${newValue}\n============\n`;
 
-        history.appendChild(previousEquation);
+        history.appendChild(result);
 
+        // Prevent repetitive appending of the last result and current value, including zero
+        // when the Clear Key is clicked repeatedly
         newValue = 0;
       }
 
@@ -180,11 +184,13 @@ const initializeCalculatorApp = () => {
       if (calculateKeyPressed || newValue != currentValue.value) {
         // Append the result of the last Equation Sequence with a Divider
         // to indicate a New Set of Equation Sequence in the History Panel
-        let previousEquation = document.createElement("p");
-        previousEquation.innerText = `${newValue}\n============\n`;
+        let result = document.createElement("p");
+        result.innerText = `${newValue}\n============\n`;
 
-        history.appendChild(previousEquation);
+        history.appendChild(result);
 
+        // Prevent repetitive appending of the last result and current value, including zero
+        // when the Delete Key is pressed repeatedly
         newValue = 0;
       }
 
@@ -212,11 +218,13 @@ const initializeCalculatorApp = () => {
       if (calculateKeyPressed || newValue != currentValue.value) {
         // Append the result of the last Equation Sequence with a Divider
         // to indicate a New Set of Equation Sequence in the History Panel
-        let previousEquation = document.createElement("p");
-        previousEquation.innerText = `${newValue}\n============\n`;
+        let result = document.createElement("p");
+        result.innerText = `${newValue}\n============\n`;
 
-        history.appendChild(previousEquation);
+        history.appendChild(result);
 
+        // Prevent repetitive appending of the last result and current value, including zero
+        // when the Delete Key is clicked repeatedly
         newValue = 0;
       }
 
@@ -412,12 +420,15 @@ const initializeCalculatorApp = () => {
       if (calculateKeyPressed && newValue != currentValue.value) {
         // Append the result of the last Equation Sequence with a Divider
         // to indicate a New Set of Equation Sequence in the History Panel
-        let previousEquation = document.createElement("p");
-        previousEquation.innerText = `${newValue}\n============\n`;
+        let result = document.createElement("p");
+        result.innerText = `${newValue}\n============\n`;
 
-        history.appendChild(previousEquation);
-
+        history.appendChild(result);
+        previousValue.innerText = "";
         newNumberFlag = false;
+
+        // Prevent repetitive appending of the last result and current value, including zero
+        newValue = 0;
       }
 
       calculateKeyPressed = false;
